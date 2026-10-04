@@ -1,0 +1,21 @@
+{
+  "name": "restaurant-pos-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../admin-frontend && npm install",
+    "start": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\" \"npm run start --prefix admin-frontend\"",
+    "start:prod": "node scripts/start-prod.js",
+    "stop": "node scripts/stop-services.js",
+    "dev": "concurrently -k -n \"BACKEND,ORDER,ADMIN\" -c \"blue,green,magenta\" \"npm run dev --prefix backend\" \"npm run start --prefix frontend\" \"npm run start --prefix admin-frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:order": "npm run start --prefix frontend",
+    "dev:admin": "npm run start --prefix admin-frontend",
+    "build:order": "npm run build --prefix frontend",
+    "build:admin": "npm run build --prefix admin-frontend",
+    "build": "npm run build:order && npm run build:admin"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "serve": "^14.2.6"
+  }
+}
